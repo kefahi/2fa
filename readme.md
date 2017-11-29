@@ -1,6 +1,6 @@
 # 2FA
 
-A dead-simple Two-Factor Authentication (2FA) One-Time-Password (OTP) generator command line tool writting in Python3 and reduced from py2fa.
+A dead-simple Two-Factor Authentication (2FA) One-Time-Password (OTP) generator command-line tool writting in Python3. Reduced from py2fa.
 
 ```bash
 cp 2fa.json.sample 2fa.json
