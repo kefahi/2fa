@@ -50,4 +50,4 @@ if args.wait:
 else:
     m, s = divmod(expires_at, 60)
     h, m = divmod(m, 60)
-    print ("Expires at: %d:%02d:%02d (in %d seconds)" % (h%24,m,s,remaining_seconds))
+    print ("Expires at: %d:%02d:%02d - in %d seconds" % (h%24,m,s,remaining_seconds))

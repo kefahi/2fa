@@ -4,10 +4,9 @@ A command-line generator of Time-based One-time Password (TOTP) for Two-Factor A
 
 
 ```bash
-cp 2fa.json.sample 2fa.json
-# Edit to fit your needs; the json format is self-explainatory.
+# Edit/create a json file similar to sample.my2fa.json to fit your needs; the json format is self-explainatory.
 # Then run
-./2fa.py
+./2fa.py -j sample.my2fa.json
 # For options
 ./2fa.py -h
 ```
