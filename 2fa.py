@@ -38,7 +38,7 @@ myfile.close()
 
 expires_at = int(time.time()+30)//30*30
 for item in accounts:
-    if not args.match or args.match and args.match.lower() in item['Name'].lower(): 
+    if not args.match or args.match.lower() in item['Name'].lower(): 
         print("%+12s -- %06d" % (item['Name'], otp(item['Secret'])))
 
 print()
