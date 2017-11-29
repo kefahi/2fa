@@ -17,10 +17,16 @@ def otp(secret):
 
     return h
 
-import json,sys
+import json,sys,argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--json", help="The 2fa json file", default="./2fa.json")
+group = parser.add_mutually_exclusive_group()
+group.add_argument("-w","--wait", help="Wait until the OTP expires and show count-down", action="store_true")
+args = parser.parse_args()
 
 try:
-    myfile = open('./2fa.json', 'rb')
+    myfile = open(args.json, 'rb')
 except IOError:
     print("Failed to open the json file")
     sys.exit(1)
@@ -30,17 +36,22 @@ accounts = data['Accounts']
 
 myfile.close()
 
-runat = int(time.time()+30)//30*30
+expires_at = int(time.time()+30)//30*30
 for item in accounts:
     print("%+12s -- %06d" % (item['Name'], otp(item['Secret'])))
 
-print("             __ ______")
+print()
 
 # Calc remaining
-remaining_seconds = (runat - time.time())
+remaining_seconds = (expires_at - time.time())
 
-for remaining in range(int(remaining_seconds), -1, -1):
-    print("\r   remaining -- %-02d" % (remaining), end='')
-    time.sleep(1)
+if args.wait:
+    for remaining in range(int(remaining_seconds), -1, -1):
+        print("\r   remaining -- %-02d" % (remaining), end='')
+        time.sleep(1)
 
-print("\n")
+    print()
+else:
+    m, s = divmod(expires_at, 60)
+    h, m = divmod(m, 60)
+    print ("Expires at: %d:%02d:%02d (in %d seconds)" % (h%24,m,s,remaining_seconds))
