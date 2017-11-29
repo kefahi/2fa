@@ -1,0 +1,6 @@
+{
+  "Accounts": [
+		{"Name":"Github", "Secret":"zzz"},
+		{"Name":"Google", "Secret":"yyyy"}
+  ]
+}
