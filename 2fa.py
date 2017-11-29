@@ -20,9 +20,9 @@ def otp(secret):
 import json,sys,argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--json", help="The 2fa json file", default="./2fa.json")
-group = parser.add_mutually_exclusive_group()
-group.add_argument("-w","--wait", help="Wait until the OTP expires and show count-down", action="store_true")
+parser.add_argument("-j", "--json", help="The 2fa json file", default="./2fa.json")
+parser.add_argument("-m", "--match", help="Only match entries that contain the provided string", default="")
+parser.add_argument("-w", "--wait", help="Wait until the OTP expires and show count-down", action="store_true")
 args = parser.parse_args()
 
 try:
@@ -38,7 +38,8 @@ myfile.close()
 
 expires_at = int(time.time()+30)//30*30
 for item in accounts:
-    print("%+12s -- %06d" % (item['Name'], otp(item['Secret'])))
+    if not args.match or args.match and args.match.lower() in item['Name'].lower(): 
+        print("%+12s -- %06d" % (item['Name'], otp(item['Secret'])))
 
 print()
 
