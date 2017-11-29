@@ -2,19 +2,14 @@
 import hmac, base64, struct, hashlib, time
 
 def otp(secret):
-    # Timer-based OTP
     secret = secret.replace(" ", "")
     secret += '=' * (-len(secret) % 8)  # Add correct '=' padding
-
     intervals_no = int(time.time())//30 
-
-    # Counter-based OTP
     key = base64.b32decode(secret, True)
     msg = struct.pack(">Q", intervals_no)
     h = hmac.new(key, msg, hashlib.sha1).digest()
     o = h[19] & 15
     h = (struct.unpack(">I", h[o:o+4])[0] & 0x7fffffff) % 1000000
-
     return h
 
 import json,sys,argparse
@@ -33,7 +28,6 @@ except IOError:
 
 data = json.loads( myfile.read() )
 accounts = data['Accounts']
-
 myfile.close()
 
 expires_at = int(time.time()+30)//30*30
