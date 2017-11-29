@@ -1,7 +1,0 @@
-{
-  "Accounts": [
-    {"Name":"Your-providers-name", "Secret":"the 2FA code"}
-		{"Name":"Github", "Secret":"zzz"},
-		{"Name":"Google", "Secret":"yyyy"}
-  ]
-}

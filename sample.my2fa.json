@@ -1,0 +1,7 @@
+{
+  "Accounts": [
+    {"Name":"prov-name", "Secret":"NZUWGZJMEBUHK2B7"},
+		{"Name":"Github",    "Secret":"K5UGC5BHOMQG63RAPFXXK4RANVUW4ZB7"},
+		{"Name":"Google",    "Secret":"NZUWGZJMEBUHK2A"}
+  ]
+}
