@@ -2,6 +2,9 @@
 
 A command-line generator of Time-based One-time Password (TOTP) for Two-Factor Authentication (2FA) written in Python3 and Go lang (two identical versions). Reduced from [py2fa](https://github.com/cpiehl/py2fa) which offers a graphical (Gtk) user interface.
 
+![In action](2fa-py.gif)
+
+
 
 ```bash
 # Edit/create a json file similar to sample.my2fa.json to fit your needs; 
@@ -15,3 +18,4 @@ go build 2fa.go
 ./2fa -json sample.my2fa.json
 ./2fa -h
 ```
+
