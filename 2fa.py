@@ -9,8 +9,8 @@ def totp(secret):
     msg = struct.pack(">Q", intervals_no)
     h = hmac.new(key, msg, hashlib.sha1).digest()
     o = h[19] & 15
-    h = (struct.unpack(">I", h[o:o+4])[0] & 0x7fffffff) % 1000000
-    return h
+    d = (struct.unpack(">I", h[o:o+4])[0] & 0x7fffffff) % 1000000
+    return d
 
 import json,sys,argparse
 
@@ -48,6 +48,5 @@ if args.wait:
 
     print()
 else:
-    m, s = divmod(expires_at, 60)
-    h, m = divmod(m, 60)
-    print ("Expires at: %d:%02d:%02d - in %d seconds" % (h%24,m,s,remaining_seconds))
+    t = time.localtime(expires_at)
+    print("Expires at: %s - in %d seconds." %(time.strftime('%H:%M:%S', t), remaining_seconds))
