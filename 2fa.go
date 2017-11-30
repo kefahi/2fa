@@ -15,12 +15,10 @@ import (
 )
 
 type fajson struct {
-	Accounts []account
-}
-
-type account struct {
-	Name   string
-	Secret string
+	Accounts []struct {
+		Name   string
+		Secret string
+	}
 }
 
 func main() {
