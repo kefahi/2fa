@@ -24,6 +24,7 @@ type fajson struct {
 func main() {
 
 	pfile := flag.String("json", "./my2fa.json", "The 2FA json file")
+	pmatch := flag.String("match", "", "only match entries that contain the provided substring")
 	pwait := flag.Bool("wait", false, "Wait until OTP expires and show count-down")
 	flag.Parse()
 
@@ -37,7 +38,9 @@ func main() {
 
 	expiresAt := (time.Now().Unix() + 30) / 30 * 30
 	for _, account := range fa.Accounts {
-		fmt.Printf("% 12s -- %06d\n", account.Name, totp(account.Secret))
+		if len(*pmatch) == 0 || strings.Contains(strings.ToLower(account.Name), strings.ToLower(*pmatch)) {
+			fmt.Printf("% 12s -- %06d\n", account.Name, totp(account.Secret))
+		}
 	}
 
 	fmt.Println()
